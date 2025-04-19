@@ -35,7 +35,7 @@ export default function SignupPage() {
     setIsSubmitting(true);
     setError(null);
   
-    const router = useRouter(); // Initialize the router for navigation
+    const router = useRouter(); 
   
     try {
       const response = await fetch(`${baseURL}/pages/signup`, {
