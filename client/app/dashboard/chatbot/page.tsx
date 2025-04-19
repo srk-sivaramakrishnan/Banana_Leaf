@@ -16,7 +16,7 @@ interface ChatbotProps {
     extraClasses?: string;
 }
 
-export default function Chatbot({ extraClasses = '' }: ChatbotProps) {
+export default function Chatbot({ extraClasses = '' }: { extraClasses?: string }) {
     const [messages, setMessages] = useState<Message[]>([]);
     const [inputText, setInputText] = useState('');
     const textareaRef = useRef<HTMLTextAreaElement>(null);
