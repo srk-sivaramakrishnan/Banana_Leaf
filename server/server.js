@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const pagesRoute = require('./routes/pagesRoute');
-// const adminRoute = require('./routes/adminRoutes');
-// const clientRoute = require('./routes/clientRoutes');
+const chatbotRoute = require('./routes/chatbotRoute');
+
 
 // Load environment variable
 dotenv.config();
@@ -19,8 +19,8 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/pages', pagesRoute);
-// app.use('/admin', adminRoute);
-// app.use('/client', clientRoute);
+app.use('/chatbot', chatbotRoute)
+
 
 // Handle 404 (Not Found)
 app.use((req, res, next) => {

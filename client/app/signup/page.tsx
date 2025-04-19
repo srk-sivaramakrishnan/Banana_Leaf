@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import { Leaf, Loader2, Home, Check, Eye, EyeOff } from "lucide-react";
+import { useRouter } from 'next/router';
 import { auth, googleProvider } from "../../services/firebaseConfig";
 import { signInWithPopup } from "firebase/auth";
 
@@ -30,12 +31,13 @@ export default function SignupPage() {
     }));
   };
 
-  // Final submission handler for step 2
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
-
+  
+    const router = useRouter(); // Initialize the router for navigation
+  
     try {
       const response = await fetch(`${baseURL}/pages/signup`, {
         method: 'POST',
@@ -44,11 +46,11 @@ export default function SignupPage() {
         },
         body: JSON.stringify(formData)
       });
-
+  
       // Read the raw response text
       const text = await response.text();
       console.log("Raw response text:", JSON.stringify(text));
-
+  
       // Trim the text and attempt to parse JSON
       const trimmedText = text.trim();
       let data;
@@ -57,19 +59,22 @@ export default function SignupPage() {
       } catch (jsonError) {
         throw new Error("Failed to parse JSON. Raw response: " + trimmedText);
       }
-
+  
       console.log("Response data:", data);
-
+  
       if (!response.ok) {
         throw new Error(data.error || 'Signup failed');
       }
-
+  
       // Store the token in sessionStorage
       sessionStorage.setItem('token', data.token);
-
+  
       console.log("User created:", data.user);
       setSubmitted(true);
-
+  
+      // Redirect to dashboard
+      router.push('/dashboard'); // Redirect to the dashboard page
+  
       // Optionally clear or redirect the form here
       setTimeout(() => {
         setSubmitted(false);

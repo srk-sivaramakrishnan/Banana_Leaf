@@ -29,7 +29,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           {children}
           
           {/* Footer with copyright */}
-          <footer className="mt-12 pt-6 border-t border-gray-100">
+          <footer className="mt-5 pt-6 border-t border-gray-100">
             <p className="text-xs text-gray-500 text-center">© 2025 BananaLeaf AI. All rights reserved.</p>
           </footer>
         </main>

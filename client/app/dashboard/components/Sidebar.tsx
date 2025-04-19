@@ -22,7 +22,7 @@ export default function Sidebar() {
   const menuItems: MenuItem[] = [
     { name: 'Dashboard', icon: LayoutDashboard, path: '/dashboard', id: 'dashboard' },
     { name: 'Leaf Detecticon', icon: Package, path: '/dashboard/leaf-detection', id: 'Leaf-detection' },
-    { name: 'Chatbot', icon: BarChart, path: '/dashboard/Chatbot', id: 'Chatbot' },
+    { name: 'Chatbot', icon: BarChart, path: '/dashboard/chatbot', id: 'Chatbot' },
     { name: 'History', icon: Store, path: '/dashboard/History', id: 'History' },
     { name: 'Fertilizers', icon: Box, path: '/dashboard/Fertilizers', id: 'Fertilizers' },
     { name: 'Settings', icon: Settings, path: '/dashboard/settings', id: 'settings' },

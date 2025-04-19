@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Info, AlertCircle, CheckCircle, Leaf, ArrowRight } from 'lucide-react';
 import ImageUploadAndCamera from './components/ImageUploadAndCamera';
-import DashboardLayout from "../../dashboard/components/DashboardLayout";
+import DashboardLayout from '../components/DashboardLayout';
 
 const getDiseaseIcon = (disease: string) => {
   switch (disease?.toLowerCase()) {
