@@ -12,7 +12,6 @@ import {
 } from 'lucide-react';
 import Dropzone from 'react-dropzone';
 
-// Utility to pick an icon based on disease name
 const getDiseaseIcon = (disease: string) => {
   switch (disease?.toLowerCase()) {
     case 'blight':
@@ -24,10 +23,7 @@ const getDiseaseIcon = (disease: string) => {
   }
 };
 
-// Utility to format disease name
 const translateDiseaseName = (disease: string) => disease || 'Unknown Disease';
-
-// Utility to format details text
 const translateDiseaseDetails = (text: string) => text || 'No information available.';
 
 export default function LeafDetectionPage() {
@@ -36,12 +32,12 @@ export default function LeafDetectionPage() {
   const [preview, setPreview] = useState<string | null>(null);
   const [results, setResults] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [showLiveCamera, setShowLiveCamera] = useState(false);
+  const [stream, setStream] = useState<MediaStream | null>(null);
+
   const reportRef = useRef<HTMLDivElement>(null);
   const cameraInputRef = useRef<HTMLInputElement>(null);
-
-  const [showLiveCamera, setShowLiveCamera] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [stream, setStream] = useState<MediaStream | null>(null);
 
   useEffect(() => {
     const stored = sessionStorage.getItem('user');
@@ -63,6 +59,14 @@ export default function LeafDetectionPage() {
     reader.readAsDataURL(file);
   }, [file]);
 
+  useEffect(() => {
+    return () => {
+      if (stream) {
+        stream.getTracks().forEach((track) => track.stop());
+      }
+    };
+  }, [stream]);
+
   const handleDrop = useCallback((accepted: File[]) => {
     if (accepted.length > 0) setFile(accepted[0]);
   }, []);
@@ -72,6 +76,53 @@ export default function LeafDetectionPage() {
     if (files && files[0]) {
       setFile(files[0]);
     }
+  };
+
+  const handleCameraClick = () => {
+    const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/.test(
+      navigator.userAgent
+    );
+    if (isMobile) {
+      cameraInputRef.current?.click();
+    } else {
+      startDesktopCamera();
+    }
+  };
+
+  const startDesktopCamera = async () => {
+    try {
+      const mediaStream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'user' },
+      });
+      setStream(mediaStream);
+      setShowLiveCamera(true);
+      if (videoRef.current) {
+        videoRef.current.srcObject = mediaStream;
+        videoRef.current.play();
+      }
+    } catch (err) {
+      console.error('Camera access denied or failed', err);
+    }
+  };
+
+  const captureFromVideo = () => {
+    const canvas = document.createElement('canvas');
+    const video = videoRef.current;
+    if (video) {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext('2d');
+      ctx?.drawImage(video, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob((blob) => {
+        if (blob) {
+          const capturedFile = new File([blob], 'capture.jpg', { type: 'image/jpeg' });
+          setFile(capturedFile);
+          setPreview(URL.createObjectURL(blob));
+        }
+      }, 'image/jpeg');
+    }
+    stream?.getTracks().forEach((track) => track.stop());
+    setShowLiveCamera(false);
   };
 
   const handleUpload = async () => {
@@ -103,43 +154,8 @@ export default function LeafDetectionPage() {
     window.location.href = '/signin';
   };
 
-  const startDesktopCamera = async () => {
-    try {
-      const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
-      setStream(mediaStream);
-      setShowLiveCamera(true);
-      if (videoRef.current) {
-        videoRef.current.srcObject = mediaStream;
-        videoRef.current.play();
-      }
-    } catch (err) {
-      console.error('Camera access denied or failed', err);
-    }
-  };
-
-  const captureFromVideo = () => {
-    const canvas = document.createElement('canvas');
-    const video = videoRef.current;
-    if (video) {
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      const ctx = canvas.getContext('2d');
-      ctx?.drawImage(video, 0, 0, canvas.width, canvas.height);
-      canvas.toBlob(blob => {
-        if (blob) {
-          const capturedFile = new File([blob], 'capture.jpg', { type: 'image/jpeg' });
-          setFile(capturedFile);
-          setPreview(URL.createObjectURL(blob));
-        }
-      }, 'image/jpeg');
-    }
-    stream?.getTracks().forEach(track => track.stop());
-    setShowLiveCamera(false);
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      {/* Navbar */}
       <nav className="bg-white shadow-sm px-6 py-4 flex justify-between items-center">
         <div className="flex items-center space-x-3">
           <UserIcon className="text-gray-600" />
@@ -154,14 +170,12 @@ export default function LeafDetectionPage() {
         </div>
       </nav>
 
-      {/* Main Content */}
       <main className="flex-grow p-8">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-2xl font-semibold mb-6 text-gray-800">
             Leaf Disease Detection
           </h1>
 
-          {/* Drag & drop */}
           <Dropzone onDrop={handleDrop} accept={{ 'image/*': [] }} multiple={false}>
             {({ getRootProps, getInputProps, isDragActive }) => (
               <div
@@ -184,14 +198,13 @@ export default function LeafDetectionPage() {
             )}
           </Dropzone>
 
-          {/* Mobile camera capture */}
           <div className="mt-4 text-center">
             <button
-              onClick={() => cameraInputRef.current?.click()}
+              onClick={handleCameraClick}
               className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
             >
               <Camera size={20} />
-              Use Mobile Camera
+              Use Camera
             </button>
             <input
               ref={cameraInputRef}
@@ -203,21 +216,15 @@ export default function LeafDetectionPage() {
             />
           </div>
 
-          {/* Desktop camera capture */}
-          <div className="mt-4 text-center">
-            <button
-              onClick={startDesktopCamera}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
-            >
-              <Camera size={20} />
-              Open Desktop Camera
-            </button>
-          </div>
-
-          {/* Live Camera View */}
           {showLiveCamera && (
             <div className="mt-6 text-center">
-              <video ref={videoRef} className="mx-auto rounded-lg shadow max-h-64" />
+              <video
+                ref={videoRef}
+                autoPlay
+                playsInline
+                muted
+                className="mx-auto w-full max-w-md rounded-lg shadow"
+              />
               <button
                 onClick={captureFromVideo}
                 className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
@@ -227,18 +234,16 @@ export default function LeafDetectionPage() {
             </div>
           )}
 
-          {/* Preview */}
           {preview && (
             <div className="mt-6 text-center">
               <img
                 src={preview}
                 alt="Selected image preview"
-                className="mx-auto max-h-64 rounded-lg shadow"
+                className="mx-auto w-full max-w-md rounded-lg shadow"
               />
             </div>
           )}
 
-          {/* Upload button */}
           {file && !loading && (
             <button
               onClick={handleUpload}
@@ -248,12 +253,10 @@ export default function LeafDetectionPage() {
             </button>
           )}
 
-          {/* Loading state */}
           {loading && <p className="mt-6 text-center text-gray-600">Detecting…</p>}
 
           <div ref={reportRef} />
 
-          {/* Results */}
           {results && (
             <div className="mt-6 p-6 bg-white rounded-lg shadow border border-emerald-100">
               <div className="flex items-center space-x-3 mb-6 pb-4 border-b border-emerald-100">
