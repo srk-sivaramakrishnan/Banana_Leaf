@@ -7,7 +7,7 @@ const pagesRoute = require('./routes/pagesRoute');
 // const adminRoute = require('./routes/adminRoutes');
 // const clientRoute = require('./routes/clientRoutes');
 
-// Load environment variable
+// Load environment variables
 dotenv.config();
 
 const app = express();
