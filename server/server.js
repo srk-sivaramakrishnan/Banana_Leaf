@@ -7,7 +7,7 @@ const pagesRoute = require('./routes/pagesRoute');
 const chatbotRoute = require('./routes/chatbotRoute');
 
 
-// Load environment variable
+// Load environment variables
 dotenv.config();
 
 const app = express();
