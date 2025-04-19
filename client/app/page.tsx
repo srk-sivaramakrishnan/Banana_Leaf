@@ -94,7 +94,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <a
-                href="/detection"
+                href="/leaf-detection"
                 className="inline-block px-6 py-3 rounded-xl text-white text-lg font-medium bg-gradient-to-r from-green-600 to-emerald-500 shadow-lg hover:shadow-xl hover:translate-y-px transition-all duration-200"
               >
                 Try Now
