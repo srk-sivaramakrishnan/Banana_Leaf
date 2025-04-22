@@ -72,7 +72,7 @@ export default function SignupPage() {
       setSubmitted(true);
   
       // Redirect to dashboard
-      router.push('/dashboard'); // Redirect to the dashboard page
+      router.push('/dashboard'); 
   
       // Optionally clear or redirect the form here
       setTimeout(() => {
