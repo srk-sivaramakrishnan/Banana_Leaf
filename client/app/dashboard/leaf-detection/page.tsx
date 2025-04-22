@@ -44,7 +44,7 @@ export default function LeafDetectionPage() {
     const formData = new FormData();
     formData.append('image', file);
     try {
-      const res = await fetch('https://rationally-polite-dodo.ngrok-free.app/predict', {
+      const res = await fetch('https://stirring-morally-chamois.ngrok-free.app/predict', {
         method: 'POST',
         body: formData,
       });
