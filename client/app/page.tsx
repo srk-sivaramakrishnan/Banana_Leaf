@@ -113,7 +113,7 @@ export default function Home() {
             <div className="relative bg-white p-4 rounded-3xl shadow-xl overflow-hidden">
               <div className="aspect-w-4 aspect-h-3 bg-green-50 rounded-2xl overflow-hidden">
                 <img
-                  src="/home/banana-ai.jpg"
+                  src="/banana-leaf.jpg"
                   alt="Banana plant with AI detection overlay"
                   className="object-cover rounded-2xl"
                 />
