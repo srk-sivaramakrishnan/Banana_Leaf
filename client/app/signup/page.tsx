@@ -9,7 +9,7 @@ import { signInWithPopup } from "firebase/auth";
 const baseURL = process.env.NEXT_PUBLIC_BASEURL;
 
 export default function SignupPage() {
-  const router = useRouter(); // Correct: move router here at top
+  const router = useRouter(); 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
