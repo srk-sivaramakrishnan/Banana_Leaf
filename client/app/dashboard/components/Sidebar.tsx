@@ -3,7 +3,19 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Leaf, LayoutDashboard, Package, Store, BarChart, Box, Tag, CreditCard, Settings, FileText, Headphones, LogOut, ChevronLeft, ChevronRight } from 'lucide-react';
+import { 
+  Leaf, 
+  LayoutDashboard, 
+  Microscope, 
+  MessageSquare, 
+  Beaker, 
+  Settings, 
+  Key, 
+  Headphones, 
+  LogOut, 
+  ChevronLeft, 
+  ChevronRight 
+} from 'lucide-react';
 
 // Define a type for the menu items
 interface MenuItem {
@@ -21,12 +33,11 @@ export default function Sidebar() {
 
   const menuItems: MenuItem[] = [
     { name: 'Dashboard', icon: LayoutDashboard, path: '/dashboard', id: 'dashboard' },
-    { name: 'Leaf Detecticon', icon: Package, path: '/dashboard/leaf-detection', id: 'Leaf-detection' },
-    { name: 'Chatbot', icon: BarChart, path: '/dashboard/chatbot', id: 'Chatbot' },
-    { name: 'History', icon: Store, path: '/dashboard/History', id: 'History' },
-    { name: 'Fertilizers', icon: Box, path: '/dashboard/Fertilizers', id: 'Fertilizers' },
+    { name: 'Leaf Detection', icon: Microscope, path: '/dashboard/leaf-detection', id: 'leaf-detection' },
+    { name: 'Chatbot', icon: MessageSquare, path: '/dashboard/chatbot', id: 'chatbot' },
+    { name: 'Fertilizers', icon: Beaker, path: '/dashboard/fertilizers', id: 'fertilizers' },
     { name: 'Settings', icon: Settings, path: '/dashboard/settings', id: 'settings' },
-    { name: 'APi Access', icon: FileText, path: '/dashboard/APi Access', id: 'APi Access' },
+    { name: 'API Access', icon: Key, path: '/dashboard/api-access', id: 'api-access' },
     { name: 'Support', icon: Headphones, path: '/dashboard/support', id: 'support' },
   ];
 
@@ -127,13 +138,6 @@ export default function Sidebar() {
           {!collapsed && <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3">MAIN MENU</p>}
           <ul className="space-y-2">
             {menuItems.slice(0, 7).map((item) => renderMenuItem(item))}
-          </ul>
-        </div>
-
-        <div>
-          {!collapsed && <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3">SYSTEM</p>}
-          <ul className="space-y-2">
-            {menuItems.slice(7).map((item) => renderMenuItem(item, true))}
           </ul>
         </div>
       </nav>

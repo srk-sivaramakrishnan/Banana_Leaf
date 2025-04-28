@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { Leaf, Loader2, Home, Check, Eye, EyeOff } from "lucide-react";
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation'; // Correct import
 import { auth, googleProvider } from "../../services/firebaseConfig";
 import { signInWithPopup } from "firebase/auth";
 
 const baseURL = process.env.NEXT_PUBLIC_BASEURL;
 
 export default function SignupPage() {
+  const router = useRouter(); // Correct: move router here at top
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,7 +22,6 @@ export default function SignupPage() {
   const [step, setStep] = useState(1);
   const [error, setError] = useState<string | null>(null);
 
-  // Handle changes in input fields
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -34,9 +34,7 @@ export default function SignupPage() {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
-  
-    const router = useRouter(); 
-  
+
     try {
       const response = await fetch(`${baseURL}/pages/signup`, {
         method: 'POST',
@@ -45,12 +43,8 @@ export default function SignupPage() {
         },
         body: JSON.stringify(formData)
       });
-  
-      // Read the raw response text
+
       const text = await response.text();
-      console.log("Raw response text:", JSON.stringify(text));
-  
-      // Trim the text and attempt to parse JSON
       const trimmedText = text.trim();
       let data;
       try {
@@ -58,23 +52,17 @@ export default function SignupPage() {
       } catch (jsonError) {
         throw new Error("Failed to parse JSON. Raw response: " + trimmedText);
       }
-  
-      console.log("Response data:", data);
-  
+
       if (!response.ok) {
         throw new Error(data.error || 'Signup failed');
       }
-  
-      // Store the token in sessionStorage
+
       sessionStorage.setItem('token', data.token);
-  
-      console.log("User created:", data.user);
       setSubmitted(true);
-  
-      // Redirect to dashboard
-      router.push('/dashboard'); // Redirect to the dashboard page
-  
-      // Optionally clear or redirect the form here
+
+      // ✅ navigate to dashboard after successful signup
+      router.push('/dashboard');
+
       setTimeout(() => {
         setSubmitted(false);
       }, 3000);
@@ -90,24 +78,20 @@ export default function SignupPage() {
     setShowPassword(!showPassword);
   };
 
-  // Next step for the multi-step form
   const nextStep = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStep(2);
   };
 
-  // Back button event handler
   const prevStep = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setStep(1);
   };
 
-  // Handle Google Sign-In
   const handleGoogleSignIn = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
-      // Update form fields with data from Google account if available
       setFormData((prev) => ({
         ...prev,
         name: user.displayName || "",
