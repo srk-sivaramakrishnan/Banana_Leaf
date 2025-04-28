@@ -59,10 +59,18 @@ export default function SignupPage() {
 
       sessionStorage.setItem('token', data.token);
       setSubmitted(true);
+<<<<<<< HEAD
 
       // ✅ navigate to dashboard after successful signup
       router.push('/dashboard');
 
+=======
+  
+      // Redirect to dashboard
+      router.push('/dashboard'); 
+  
+      // Optionally clear or redirect the form here
+>>>>>>> 05426e91b94eeb8c96129042afce59d11341a1a0
       setTimeout(() => {
         setSubmitted(false);
       }, 3000);
