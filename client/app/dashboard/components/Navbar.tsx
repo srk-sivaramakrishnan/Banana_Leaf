@@ -1,10 +1,45 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Leaf, Bell, User, Search, ChevronDown } from 'lucide-react';
+
+const baseURL = process.env.NEXT_PUBLIC_BASEURL;
 
 export default function Navbar() {
   const [showMobileSearch, setShowMobileSearch] = useState(false);
+  const [user, setUser] = useState({ name: '', email: '' });
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const token = sessionStorage.getItem('token');
+      if (!token) return;
+  
+      try {
+        const res = await fetch(`${baseURL}/pages/get-user`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+  
+        if (!res.ok) throw new Error('Failed to fetch user');
+  
+        const data = await res.json();
+  
+        // Check if at least one user is returned
+        if (data.users && data.users.length > 0) {
+          const firstUser = data.users[0]; // Or filter based on token if needed
+          setUser({ name: firstUser.name, email: firstUser.email });
+        } else {
+          console.warn('No users found in response');
+        }
+      } catch (err) {
+        console.error('Error fetching user:', err);
+      }
+    };
+  
+    fetchUser();
+  }, []);
+  
 
   return (
     <header className="flex flex-col bg-white shadow-sm border-b border-gray-100">
@@ -25,7 +60,7 @@ export default function Navbar() {
           />
         </div>
 
-        {/* Mobile search toggle button */}
+        {/* Mobile search toggle */}
         <div className="md:hidden flex">
           {!showMobileSearch && (
             <button 
@@ -37,7 +72,7 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Right section with notifications and user profile */}
+        {/* Right section with user info */}
         <div className="flex items-center space-x-4">
           <button className="relative hover:bg-gray-50 p-2 rounded-full transition-colors">
             <Bell size={22} className="text-gray-600" />
@@ -50,15 +85,15 @@ export default function Navbar() {
               <User size={18} className="text-emerald-600" />
             </div>
             <div className="hidden md:block">
-              <p className="text-sm font-medium text-gray-800">User</p>
-              <p className="text-xs text-gray-500">user@gmail.com</p>
+              <p className="text-sm font-medium text-gray-800">{user.name || 'User'}</p>
+              <p className="text-xs text-gray-500">{user.email || 'user@email.com'}</p>
             </div>
             <ChevronDown size={16} className="text-gray-400 hidden md:block" />
           </div>
         </div>
       </div>
 
-      {/* Mobile search bar - expanded view */}
+      {/* Mobile search bar */}
       {showMobileSearch && (
         <div className="px-4 pb-4 md:hidden">
           <div className="relative flex items-center">

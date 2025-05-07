@@ -35,9 +35,7 @@ export default function Sidebar() {
     { name: 'Dashboard', icon: LayoutDashboard, path: '/dashboard', id: 'dashboard' },
     { name: 'Leaf Detection', icon: Microscope, path: '/dashboard/leaf-detection', id: 'leaf-detection' },
     { name: 'Chatbot', icon: MessageSquare, path: '/dashboard/chatbot', id: 'chatbot' },
-    { name: 'Fertilizers', icon: Beaker, path: '/dashboard/fertilizers', id: 'fertilizers' },
     { name: 'Settings', icon: Settings, path: '/dashboard/settings', id: 'settings' },
-    { name: 'API Access', icon: Key, path: '/dashboard/api-access', id: 'api-access' },
     { name: 'Support', icon: Headphones, path: '/dashboard/support', id: 'support' },
   ];
 
@@ -144,19 +142,19 @@ export default function Sidebar() {
 
       <div className={`${collapsed ? 'p-3' : 'p-5'} border-t border-gray-100`}>
         <Link
-          href="/admin"
+          href="/"
           className={`flex items-center ${collapsed ? 'justify-center' : 'space-x-3'} px-3 py-3 rounded-xl text-red-600 hover:bg-red-50 transition-colors`}
-          onMouseEnter={() => collapsed && setHovered('back')}
+          onMouseEnter={() => collapsed && setHovered('logout')}
           onMouseLeave={() => collapsed && setHovered(null)}
         >
           <LogOut size={19} className="text-red-500" />
-          {!collapsed && <span className="text-sm">Back</span>}
+          {!collapsed && <span className="text-sm">Logout</span>}
         </Link>
 
-        {/* Back tooltip when sidebar is collapsed */}
-        {collapsed && hovered === 'back' && (
+        {/* Logout tooltip when sidebar is collapsed */}
+        {collapsed && hovered === 'logout' && (
           <div className="absolute left-full ml-2 bottom-12 bg-white z-50 px-3 py-2 rounded-lg shadow-lg text-sm font-medium whitespace-nowrap border border-gray-100">
-            Back
+            Logout
             <div className="absolute top-1/2 -left-1.5 -translate-y-1/2 transform rotate-45 w-3 h-3 bg-white border-l border-t border-gray-100"></div>
           </div>
         )}

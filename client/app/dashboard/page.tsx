@@ -364,7 +364,7 @@ export default function DashboardPage() {
               </div>
               <button 
                 className="bg-white text-green-600 hover:bg-green-50 px-4 py-2 rounded-lg font-medium flex items-center justify-center"
-                onClick={() => window.open('/chatbot', '_self')}
+                onClick={() => window.open('/dashboard/chatbot', '_self')}
               >
                 Ask AI Assistant
               </button>

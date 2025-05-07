@@ -101,8 +101,24 @@ const signIn = async (req, res) => {
 
 // Get User Data on Navbar
 const getUser = async (req, res) => {
-
-}
+    try {
+      const usersSnapshot = await db.collection("users").get();
+  
+      const users = usersSnapshot.docs.map(doc => {
+        const data = doc.data();
+        return {
+          id: doc.id, // auto-generated document ID
+          name: data.name || null,
+          email: data.email || null,
+        };
+      });
+  
+      res.status(200).json({ users });
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      res.status(500).json({ error: "Failed to fetch users" });
+    }
+  };
 
 module.exports = {
     signUp,

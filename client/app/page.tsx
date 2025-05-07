@@ -35,7 +35,7 @@ export default function Home() {
               BananaLeaf AI
             </h1>
           </div>
-          
+
           <div className="hidden md:flex items-center space-x-8">
             <a href="#" className={`transition hover:text-green-600 ${activeTab === "home" ? "text-green-600 font-medium" : ""}`} onClick={() => setActiveTab("home")}>Home</a>
             <a href="#about" className={`transition hover:text-green-600 ${activeTab === "about" ? "text-green-600 font-medium" : ""}`} onClick={() => setActiveTab("about")}>About</a>
@@ -56,7 +56,7 @@ export default function Home() {
             </button>
           </div>
         </div>
-        
+
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden mt-2 p-4 bg-white rounded-lg shadow-lg">
@@ -76,15 +76,15 @@ export default function Home() {
       <section className="relative py-20 px-6 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-green-400 opacity-10 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-emerald-400 opacity-10 rounded-full blur-3xl"></div>
-        
+
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 text-center md:text-left">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
               <span className="relative">
-                Early 
+                Early
                 <span className="absolute -bottom-2 left-0 w-full h-3 bg-green-200 opacity-40 rounded"></span>
               </span>{" "}
-              Banana Leaf 
+              Banana Leaf
               <br />
               Disease Detection
             </h2>
@@ -94,7 +94,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <a
-                href="/leaf-detection"
+                href="/signin"
                 className="inline-block px-6 py-3 rounded-xl text-white text-lg font-medium bg-gradient-to-r from-green-600 to-emerald-500 shadow-lg hover:shadow-xl hover:translate-y-px transition-all duration-200"
               >
                 Try Now
@@ -107,7 +107,7 @@ export default function Home() {
               </a>
             </div>
           </div>
-          
+
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-tr from-green-100 to-transparent rounded-3xl transform rotate-6 scale-95"></div>
             <div className="relative bg-white p-4 rounded-3xl shadow-xl overflow-hidden">
@@ -160,7 +160,7 @@ export default function Home() {
               Our AI solution uses computer vision and deep learning to identify banana leaf diseases from simple photos. Early detection helps farmers take timely action and improve crop health.
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-xl shadow-sm space-y-4 hover:shadow-md transition">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-green-100 text-green-600">
@@ -169,7 +169,7 @@ export default function Home() {
               <h3 className="text-xl font-semibold">Research-Backed</h3>
               <p className="text-green-700">Trained on thousands of expert-labeled banana leaf images for various disease types.</p>
             </div>
-            
+
             <div className="bg-white p-6 rounded-xl shadow-sm space-y-4 hover:shadow-md transition">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-green-100 text-green-600">
                 <Map size={24} />
@@ -177,46 +177,13 @@ export default function Home() {
               <h3 className="text-xl font-semibold">Region-Specific</h3>
               <p className="text-green-700">Specialized for tropical and subtropical banana-growing regions and varieties.</p>
             </div>
-            
+
             <div className="bg-white p-6 rounded-xl shadow-sm space-y-4 hover:shadow-md transition">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-green-100 text-green-600">
                 <Info size={24} />
               </div>
               <h3 className="text-xl font-semibold">Actionable Insights</h3>
               <p className="text-green-700">Doesn't just detect disease—provides treatment recommendations and prevention tips.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Upload Demo Section - Interactive */}
-      <section id="upload" className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center space-y-4 mb-12">
-            <div className="inline-block bg-green-100 text-green-700 px-4 py-1 rounded-full text-sm font-medium">
-              Try It Now
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold">Upload Your Banana Leaf</h2>
-            <p className="text-lg text-green-700 max-w-3xl mx-auto">
-              Get an instant disease analysis by uploading a clear photo of your banana leaf.
-            </p>
-          </div>
-          
-          <div className="bg-white p-8 rounded-3xl shadow-md">
-            <div className="border-2 border-dashed border-green-200 rounded-2xl p-12 text-center bg-green-50 hover:bg-green-100 transition cursor-pointer"
-              onMouseEnter={handleUploadHover}
-            >
-              <UploadCloud className="mx-auto text-green-500" size={48} />
-              <p className="mt-4 text-lg font-medium text-green-700">
-                Drag and drop your leaf image here
-              </p>
-              <p className="text-green-600 text-sm mt-2">or click to browse files</p>
-              <button className="mt-6 px-6 py-2 bg-white rounded-lg border border-green-300 text-green-700 font-medium shadow-sm hover:shadow transition">
-                Select Image
-              </button>
-              <p className="mt-4 text-xs text-green-600">
-                Supported formats: JPG, PNG • Max size: 10MB
-              </p>
             </div>
           </div>
         </div>
@@ -234,7 +201,7 @@ export default function Home() {
               Our AI-powered tool gives you everything you need to monitor and protect your banana crops.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
@@ -286,11 +253,11 @@ export default function Home() {
               Our simple three-step process makes disease detection accessible to everyone.
             </p>
           </div>
-          
+
           <div className="relative">
             {/* Connection Line */}
             <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-green-200 -translate-y-1/2 rounded-full"></div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               {[
                 {
@@ -340,7 +307,7 @@ export default function Home() {
               Meet the talented team behind our banana leaf disease detection project.
             </p>
           </div>
-          
+
           {/* Researchers Section */}
           <div className="space-y-4">
             <h3 className="text-2xl font-semibold text-center">Research Team</h3>
@@ -365,7 +332,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-          
+
           {/* Professors Section */}
           <div className="space-y-4">
             <h3 className="text-2xl font-semibold text-center">Project Guides</h3>
@@ -399,7 +366,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-          
+
           {/* Project Report */}
           <div className="text-center">
             <a
@@ -423,7 +390,7 @@ export default function Home() {
             <div className="absolute top-10 left-20 w-20 h-20 bg-white rounded-full"></div>
             <div className="absolute bottom-10 right-20 w-32 h-32 bg-white rounded-full"></div>
           </div>
-          
+
           <div className="relative z-10 text-center space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold">
               Ready to protect your banana crops?
@@ -433,7 +400,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="#"
+                href="/signin"
                 className="px-8 py-3 rounded-xl bg-white text-green-600 text-lg font-semibold hover:bg-green-50 transition shadow-md hover:shadow-lg"
               >
                 Launch Detector
@@ -448,71 +415,72 @@ export default function Home() {
           </div>
         </div>
       </section>
-{/* Footer */}
-<footer className="bg-green-900 text-green-50 pt-16 pb-8 px-6">
-  <div className="max-w-6xl mx-auto">
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-      <div className="space-y-4">
-        <div className="flex items-center gap-2">
-          <Leaf size={24} />
-          <h3 className="text-xl font-bold">BananaLeaf AI</h3>
+
+      {/* Footer */}
+      <footer className="bg-green-900 text-green-50 pt-16 pb-8 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <Leaf size={24} />
+                <h3 className="text-xl font-bold">BananaLeaf AI</h3>
+              </div>
+              <p className="text-green-300 text-sm">
+                AI-powered banana leaf disease detection for better crop management and increased yield.
+              </p>
+              <div className="flex gap-4">
+                {/* Social Media Icons */}
+                <a href="#" className="w-8 h-8 bg-green-800 rounded-full flex items-center justify-center hover:bg-green-700 transition">
+                  <span className="text-xs font-bold">FB</span>
+                </a>
+                <a href="#" className="w-8 h-8 bg-green-800 rounded-full flex items-center justify-center hover:bg-green-700 transition">
+                  <span className="text-xs font-bold">TW</span>
+                </a>
+                <a href="#" className="w-8 h-8 bg-green-800 rounded-full flex items-center justify-center hover:bg-green-700 transition">
+                  <span className="text-xs font-bold">IG</span>
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-green-300">
+                <li><a href="#" className="hover:text-white transition">Home</a></li>
+                <li><a href="#about" className="hover:text-white transition">About</a></li>
+                <li><a href="#features" className="hover:text-white transition">Features</a></li>
+                <li><a href="#how" className="hover:text-white transition">How It Works</a></li>
+                <li><a href="#team" className="hover:text-white transition">Our Team</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Resources</h4>
+              <ul className="space-y-2 text-green-300">
+                <li><a href="#" className="hover:text-white transition">Documentation</a></li>
+                <li><a href="#" className="hover:text-white transition">API Access</a></li>
+                <li><a href="#" className="hover:text-white transition">Disease Database</a></li>
+                <li><a href="#" className="hover:text-white transition">Research Papers</a></li>
+                <li><a href="#" className="hover:text-white transition">Treatment Guide</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Contact</h4>
+              <ul className="space-y-2 text-green-300">
+                <li>Email: siva0327@gmail.com</li>
+                <li>Phone: +91 9080360374</li>
+                <li>Address: KITE - Saravanampatti</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-green-800 pt-8 text-center">
+            <p className="text-green-400 text-sm">
+              © {new Date().getFullYear()} BananaLeaf AI. All rights reserved. | Privacy Policy | Terms of Service
+            </p>
+          </div>
         </div>
-        <p className="text-green-300 text-sm">
-          AI-powered banana leaf disease detection for better crop management and increased yield.
-        </p>
-        <div className="flex gap-4">
-          {/* Social Media Icons */}
-          <a href="#" className="w-8 h-8 bg-green-800 rounded-full flex items-center justify-center hover:bg-green-700 transition">
-            <span className="text-xs font-bold">FB</span>
-          </a>
-          <a href="#" className="w-8 h-8 bg-green-800 rounded-full flex items-center justify-center hover:bg-green-700 transition">
-            <span className="text-xs font-bold">TW</span>
-          </a>
-          <a href="#" className="w-8 h-8 bg-green-800 rounded-full flex items-center justify-center hover:bg-green-700 transition">
-            <span className="text-xs font-bold">IG</span>
-          </a>
-        </div>
-      </div>
-      
-      <div>
-        <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-        <ul className="space-y-2 text-green-300">
-          <li><a href="#" className="hover:text-white transition">Home</a></li>
-          <li><a href="#about" className="hover:text-white transition">About</a></li>
-          <li><a href="#features" className="hover:text-white transition">Features</a></li>
-          <li><a href="#how" className="hover:text-white transition">How It Works</a></li>
-          <li><a href="#team" className="hover:text-white transition">Our Team</a></li>
-        </ul>
-      </div>
-      
-      <div>
-        <h4 className="text-lg font-semibold mb-4">Resources</h4>
-        <ul className="space-y-2 text-green-300">
-          <li><a href="#" className="hover:text-white transition">Documentation</a></li>
-          <li><a href="#" className="hover:text-white transition">API Access</a></li>
-          <li><a href="#" className="hover:text-white transition">Disease Database</a></li>
-          <li><a href="#" className="hover:text-white transition">Research Papers</a></li>
-          <li><a href="#" className="hover:text-white transition">Treatment Guide</a></li>
-        </ul>
-      </div>
-      
-      <div>
-        <h4 className="text-lg font-semibold mb-4">Contact</h4>
-        <ul className="space-y-2 text-green-300">
-          <li>Email: siva0327@gmail.com</li>
-          <li>Phone: +91 9080360374</li>
-          <li>Address: KITE - Saravanampatti</li>
-        </ul>
-      </div>
-    </div>
-    
-    <div className="border-t border-green-800 pt-8 text-center">
-      <p className="text-green-400 text-sm">
-        © {new Date().getFullYear()} BananaLeaf AI. All rights reserved. | Privacy Policy | Terms of Service
-      </p>
-    </div>
-  </div>
-</footer>
+      </footer>
     </div>
   );
 }
