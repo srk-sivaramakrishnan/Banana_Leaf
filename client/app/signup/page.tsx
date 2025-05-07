@@ -65,7 +65,7 @@ export default function SignupPage() {
       // Redirect to dashboard
       router.push('/dashboard'); 
   
-      // Optionally clear or redirect the form here
+      // Optionally clear or redirect the form herecd
       setTimeout(() => {
         setSubmitted(false);
       }, 3000);

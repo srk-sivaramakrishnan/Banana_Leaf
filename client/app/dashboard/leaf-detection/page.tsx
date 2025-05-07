@@ -106,7 +106,7 @@ export default function LeafDetectionPage() {
         )}
       </div>
 
-      {/* results */}
+      {/* results */}I
       <div ref={reportRef} />
       {results && (
         <div className="mt-8 p-6 md:p-8 bg-white rounded-2xl shadow-lg border-2 border-emerald-200 animate-fadeIn">
