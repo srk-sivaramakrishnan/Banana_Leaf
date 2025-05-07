@@ -1,4 +1,3 @@
-// Navbar.tsx
 'use client';
 
 import { useState } from 'react';
@@ -22,7 +21,7 @@ export default function Navbar() {
           <input 
             type="text" 
             placeholder="Search..." 
-            className="bg-transparent focus:outline-none text-sm w-full"
+            className="bg-transparent focus:outline-none text-sm w-full text-black"
           />
         </div>
 

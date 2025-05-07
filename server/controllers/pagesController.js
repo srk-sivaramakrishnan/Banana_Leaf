@@ -99,9 +99,15 @@ const signIn = async (req, res) => {
     }
 };
 
+// Get User Data on Navbar
+const getUser = async (req, res) => {
+
+}
+
 module.exports = {
     signUp,
     signIn,
+    getUser,
 };
 
 

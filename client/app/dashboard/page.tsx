@@ -153,10 +153,10 @@ export default function DashboardPage() {
             <p className="text-gray-600">{today}</p>
           </div>
           
-          <div className="mt-4 md:mt-0 flex space-x-3">
+          <div className="mt-4 md:mt-0 flex space-x-3 text-black">
             <button 
               className="px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 flex items-center"
-              onClick={() => window.open('/predict', '_self')}
+              onClick={() => window.open('/dashboard/leaf-detection', '_self')}
             >
               <Leaf className="h-4 w-4 text-green-500 mr-2" />
               <span>New Scan</span>
@@ -372,7 +372,7 @@ export default function DashboardPage() {
             
             <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 flex flex-col justify-between">
               <div>
-                <h3 className="text-lg font-semibold mb-2">Your Plantations</h3>
+                <h3 className="text-lg font-semibold mb-2 text-black">Your Plantations</h3>
                 <p className="text-gray-600 mb-4">You have 3 plantation areas registered for monitoring.</p>
                 <div className="space-y-2 mb-4">
                   <div className="flex justify-between text-sm">
@@ -400,7 +400,7 @@ export default function DashboardPage() {
             
             <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 flex flex-col justify-between">
               <div>
-                <h3 className="text-lg font-semibold mb-2">Treatment Recommendations</h3>
+                <h3 className="text-lg font-semibold mb-2 text-black">Treatment Recommendations</h3>
                 <p className="text-gray-600 mb-4">Based on your recent scans, we recommend:</p>
                 <ul className="space-y-2 text-sm text-gray-600 mb-4">
                   <li className="flex items-start">
