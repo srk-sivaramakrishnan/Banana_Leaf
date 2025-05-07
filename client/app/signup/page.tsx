@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Leaf, Loader2, Home, Check, Eye, EyeOff } from "lucide-react";
-import { useRouter } from 'next/navigation'; // Correct import
+import { useRouter } from 'next/navigation'; 
 import { auth, googleProvider } from "../../services/firebaseConfig";
 import { signInWithPopup } from "firebase/auth";
 
