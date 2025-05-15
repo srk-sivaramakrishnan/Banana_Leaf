@@ -7,7 +7,7 @@ import {
   Activity,
   Lightbulb,
   UploadCloud,
-  User,
+  // User,
   ChevronDown,
   Info,
   Database,
@@ -19,10 +19,10 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("home");
 
-  const handleUploadHover = () => {
-    // In a real implementation, this would show a preview animation
-    console.log("Upload button hovered");
-  };
+  // const handleUploadHover = () => {
+  //   // In a real implementation, this would show a preview animation
+  //   console.log("Upload button hovered");
+  // };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 to-white text-green-900 font-sans">
@@ -41,7 +41,7 @@ export default function Home() {
             <a href="#about" className={`transition hover:text-green-600 ${activeTab === "about" ? "text-green-600 font-medium" : ""}`} onClick={() => setActiveTab("about")}>About</a>
             <a href="#features" className={`transition hover:text-green-600 ${activeTab === "features" ? "text-green-600 font-medium" : ""}`} onClick={() => setActiveTab("features")}>Features</a>
             <a href="#how" className={`transition hover:text-green-600 ${activeTab === "how" ? "text-green-600 font-medium" : ""}`} onClick={() => setActiveTab("how")}>How It Works</a>
-            <a href="#team" className={`transition hover:text-green-600 ${activeTab === "team" ? "text-green-600 font-medium" : ""}`} onClick={() => setActiveTab("team")}>Team</a>
+            {/* <a href="#team" className={`transition hover:text-green-600 ${activeTab === "team" ? "text-green-600 font-medium" : ""}`} onClick={() => setActiveTab("team")}>Team</a> */}
           </div>
 
           <div className="flex items-center gap-4">
@@ -295,7 +295,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Team Section - Modern design */}
+      {/* Team Section - Modern design
       <section id="team" className="py-20 px-6 bg-gradient-to-br from-green-50 to-white">
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center space-y-4">
@@ -308,7 +308,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Researchers Section */}
           <div className="space-y-4">
             <h3 className="text-2xl font-semibold text-center">Research Team</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -333,7 +332,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Professors Section */}
           <div className="space-y-4">
             <h3 className="text-2xl font-semibold text-center">Project Guides</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
@@ -367,7 +365,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Project Report */}
           <div className="text-center">
             <a
               href="/report.pdf"
@@ -380,6 +377,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      End */}
 
       {/* Final CTA */}
       <section className="py-20 px-6 mb-8">

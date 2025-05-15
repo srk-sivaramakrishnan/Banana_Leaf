@@ -102,23 +102,56 @@ const signIn = async (req, res) => {
 // Get User Data on Navbar
 const getUser = async (req, res) => {
     try {
-      const usersSnapshot = await db.collection("users").get();
-  
-      const users = usersSnapshot.docs.map(doc => {
-        const data = doc.data();
-        return {
-          id: doc.id, // auto-generated document ID
-          name: data.name || null,
-          email: data.email || null,
-        };
-      });
-  
-      res.status(200).json({ users });
+        // 1. Get Authorization header
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return res.status(401).json({ error: 'Unauthorized: No token provided' });
+        }
+
+        // 2. Extract token
+        const token = authHeader.split(' ')[1];
+
+        // 3. Decode and verify token
+        let decoded;
+        try {
+            decoded = jwt.verify(token, process.env.JWT_SECRET);
+        } catch (err) {
+            return res.status(401).json({ error: 'Invalid or expired token' });
+        }
+
+        // 4. Extract user identifier from decoded token
+        // Assuming token payload contains email or userId
+        const userEmail = decoded.email; // or decoded.userId if you use uid in token
+
+        if (!userEmail) {
+            return res.status(400).json({ error: 'Invalid token payload: no email' });
+        }
+
+        // 5. Query Firestore for user by email
+        const userQuery = await db.collection('users').where('email', '==', userEmail).get();
+
+        if (userQuery.empty) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        const userDoc = userQuery.docs[0];
+        const userData = userDoc.data();
+
+        // 6. Return only name and email
+        res.status(200).json({
+            user: {
+                id: userDoc.id,
+                name: userData.name || null,
+                email: userData.email || null,
+            },
+        });
+
     } catch (error) {
-      console.error("Error fetching users:", error);
-      res.status(500).json({ error: "Failed to fetch users" });
+        console.error('Error fetching user:', error);
+        res.status(500).json({ error: 'Failed to fetch user' });
     }
-  };
+};
+
 
 module.exports = {
     signUp,

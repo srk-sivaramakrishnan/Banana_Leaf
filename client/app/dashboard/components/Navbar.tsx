@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Leaf, Bell, User, Search, ChevronDown } from 'lucide-react';
+import { jwtDecode } from 'jwt-decode';
 
 const baseURL = process.env.NEXT_PUBLIC_BASEURL;
 
@@ -9,37 +10,38 @@ export default function Navbar() {
   const [showMobileSearch, setShowMobileSearch] = useState(false);
   const [user, setUser] = useState({ name: '', email: '' });
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const token = sessionStorage.getItem('token');
-      if (!token) return;
-  
-      try {
-        const res = await fetch(`${baseURL}/pages/get-user`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-  
-        if (!res.ok) throw new Error('Failed to fetch user');
-  
-        const data = await res.json();
-  
-        // Check if at least one user is returned
-        if (data.users && data.users.length > 0) {
-          const firstUser = data.users[0]; // Or filter based on token if needed
-          setUser({ name: firstUser.name, email: firstUser.email });
-        } else {
-          console.warn('No users found in response');
-        }
-      } catch (err) {
-        console.error('Error fetching user:', err);
+useEffect(() => {
+  const fetchUser = async () => {
+    const token = sessionStorage.getItem('token');
+    if (!token) return;
+
+    // Decode the token
+    try {
+      const decoded = jwtDecode(token);
+      console.log('Decoded JWT:', decoded); // Will show userId or whatever payload is inside
+
+      const res = await fetch(`${baseURL}/pages/get-user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) throw new Error('Failed to fetch user');
+
+      const data = await res.json();
+
+      if (data.user) {
+        setUser({ name: data.user.name, email: data.user.email });
+      } else {
+        console.warn('User not found');
       }
-    };
-  
-    fetchUser();
-  }, []);
-  
+    } catch (err) {
+      console.error('Error fetching user:', err);
+    }
+  };
+
+  fetchUser();
+}, []);
 
   return (
     <header className="flex flex-col bg-white shadow-sm border-b border-gray-100">
